@@ -7,5 +7,5 @@ class Variable:
 			self.tipe = tip
 			self.value = value
 		else:
-			raise TypeError
+			raise Exception('Neprepoznana vrsta spremenljivke.')
 

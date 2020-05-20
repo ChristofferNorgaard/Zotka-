@@ -87,6 +87,7 @@ def to_num_dont_call(x):
 			return tmp
 
 def to_num(x):
+	x=int(x)
 	if x < 0:
 		predznak='minus-'
 	else:

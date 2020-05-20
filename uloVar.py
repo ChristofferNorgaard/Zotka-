@@ -1,13 +1,14 @@
-from variables import Variable
-from intVar import INT
-import numbery
+from standardLibrary.variables import Variable
+from standardLibrary.intVar import INT
+import standardLibrary.numbery as numbery
 from math import gcd
 
 def lcm(a, b):
 	return a*b/gcd(a, b)
 
 class ULO(Variable):
-	def __init__(self, up, down):
+	def __init__(self, value):
+		up, down = value.split('$')
 		Variable.__init__(self, 'ulo', (up, down))
 		try:
 			self.real_up = numbery.from_num(up)
@@ -21,9 +22,8 @@ class ULO(Variable):
 			self.value = (numbery.to_num(self.real_up), numbery.to_num(self.real_down))
 			del tmp
 		except Exception as error:
-			print('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
 			print(error)
-			raise NumberError
+			raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
 
 	#binary operators
 	def __add__(self, other):
@@ -40,7 +40,7 @@ class ULO(Variable):
 		return ULO(numbery.to_num(self.real_up ** other), numbery.to_num(self.real_down ** other))
 	#unary operators
 	def __str__(self):
-		return str(self.value)
+		return self.value[0]+'$'+self.value[1]
 	def __neg__(self):
 		return ULO(numbery.to_num(-numbery.from_num(self.real_up)), self.real_down)
 	def __pos__(self):

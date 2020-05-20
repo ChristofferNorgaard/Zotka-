@@ -1,5 +1,5 @@
-from variables import Variable
-import numbery
+from standardLibrary.variables import Variable
+import standardLibrary.numbery as numbery
 
 class INT(Variable):
 	def __init__(self, value):
@@ -7,9 +7,8 @@ class INT(Variable):
 		try:
 			self.real_value = numbery.from_num(value)
 		except Exception as error:
-			print('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
 			print(error)
-			raise NumberError
+			raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
 
 	#binary operators
 	def __add__(self, other):
