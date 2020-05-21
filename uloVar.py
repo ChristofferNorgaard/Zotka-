@@ -74,3 +74,14 @@ class ULO(Variable):
 		return float(self) >= float(other)
 	def __gt__(self, other):
 		return float(self) > float(other)
+	###################################################################
+	###################################################################
+	def from_sklad(value):
+		val=float(value)
+		v = int(val)
+		o = val - v
+		if o > 0.0001:
+			u = 1/o
+			return ULO(numbery.to_num(v)+'$ena') + ULO('ena$ena')/from_sklad(u)
+		else:
+			return ULO(numbery.to_num(v)+'$ena')

@@ -1,6 +1,9 @@
 prosim definiraj: inthaha[}
 definiraj: narx[dvesto-dvanajst}
 prosim definiraj: ulon[osem$tri}
-prosim naredi: izpiši|nT
-prosim naredi: n3preberi_ulomek|T
-naredi: izpiši|nT
+potisni: n
+prosim naredi: izpiši|T
+prosim naredi: preberi_ulomek|T
+pojej: n
+prosim potisni: n
+prosim naredi: izpiši|T

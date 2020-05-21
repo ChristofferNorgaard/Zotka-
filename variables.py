@@ -1,4 +1,4 @@
-import standardLibrary.numbery
+import standardLibrary.numbery as numbery
 
 class Variable:
 	types = {'int', 'nar', 'dec', 'ulo', 'flo', 'kom', 'bul', 'črk', 'bes', 'niz', 'sez', 'mno', 'slo'}
@@ -9,3 +9,5 @@ class Variable:
 		else:
 			raise Exception('Neprepoznana vrsta spremenljivke.')
 
+def totype(tip, value):
+	return tip(value)

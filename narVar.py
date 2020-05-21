@@ -66,3 +66,8 @@ class NAR(INT):
 		return self.real_value >= other.real_value
 	def __gt__(self, other):
 		return self.real_value > other.real_value
+	#################################################################
+	#################################################################
+	def from_sklad(value):
+		v = int(value)
+		return NAR(v)

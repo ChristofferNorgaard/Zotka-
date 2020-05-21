@@ -5,17 +5,19 @@ from standardLibrary.uloVar import ULO
 from standardLibrary.functions import *
 
 type_to_var = {'int':INT, 'nar':NAR, 'dec':'', 'ulo':ULO, 'flo':'', 'kom':'', 'bul':'', 'črk':'', 'bes':'', 'niz':str, 'sez':list, 'mno':set, 'slo':dict}
-name_to_func = {'izpiši' : printf, 'preberi' : inputf, 'preberi_celo_število' : inputint, 'preberi_ulomek':inputulo}
+name_to_func = {'izpiši|T' : printf, 'preberi|T' : inputf, 'preberi_celo_število|T' : inputint, 'preberi_ulomek|T':inputulo, 'izpiši|izplakni|T': print_and_flush, 'izpiši|z določenim koncem in izplakni(da/ne)T' : superprint, 'izpiši_celo_število|T' : printint}
+minus_to_f = { '-' : krat, '--' : plus, '---': minus, '----': deljeno, '-----': na, '------': koren, '-------': faktorel, '--------': št_diagonal, '---------': ploščina_elipse, '----------': deljeno_z_ena}
 
 def check_for_kindness(program):
+	zacetki = ['naredi', 'definiraj', 'preveri', 'potisni', 'pojej', 'izračunaj', 'komentiraj']
 	prosim_naredi=0
 	naredi=0
 	x=1
 	for line in program:
 		tmp = line.split(':')[0]
-		if tmp in ['prosim naredi', 'prosim definiraj', 'prosim preveri']:
+		if tmp in ['prosim '+x for x in zacetki]:
 			prosim_naredi += 1
-		elif tmp in ['naredi', 'definiraj', 'preveri']:
+		elif tmp in zacetki:
 			naredi += 1
 		else:
 			if tmp != '':
@@ -30,14 +32,14 @@ def check_for_kindness(program):
 
 def generate_variables(s):
 	fn = []
-	stack = ''
+	tip = ''
 	name = ''
 	value = ''
 	x=0
 	while x < len(s):
-		stack+=s[x]
-		if stack in Variable.types:
-			stack=(type_to_var[stack])
+		tip+=s[x]
+		if tip in Variable.types:
+			tip=(type_to_var[tip])
 			name=''
 			x+=1
 			while s[x] != '[':
@@ -48,48 +50,46 @@ def generate_variables(s):
 			while s[x] != '}':
 				value+=s[x]
 				x+=1
-			fn.append((stack(value), name))
-			stack = ''
+			fn.append((tip(value), name))
+			tip = ''
 		x+=1
 	return fn
-
-def generate_function(s):
-	f = ''
-	args = ''
-	target_var = ''
-
-	x=0
-	if '3' in s:
-		while s[x] != '3':
-			target_var += s[x]
-			x+=1
-		x+=1
-	while s[x] != '|':
-			f += s[x]
-			x+=1
-	x+=1
-	while s[x] != 'T':
-		args += s[x]
-		x+=1
-	args=args.split('#')
-
-	return (target_var, name_to_func[f], args)	
+	
 
 
 class Line:
 	def __init__(self, line):
 		self.line = line
 		self.function = []
-		if line.split(':')[0] in ['definiraj', 'prosim definiraj']:
+		levo = line.split(':')[0]
+		self.desno = line[len(levo)+2:] 
+		
+		if levo in ['definiraj', 'prosim definiraj']:
 			self.tip = 'def'
-		elif line.split(':')[0] in ['naredi', 'prosim naredi']:
+		elif levo in ['naredi', 'prosim naredi']:
 			self.tip = 'do'
+		elif levo in ['potisni', 'prosim potisni']:
+			self.tip = 'push'
+		elif levo in ['pojej', 'prosim pojej']:
+			self.tip = 'eat'
+		elif levo in ['izračunaj', 'prosim izračunaj']:
+			self.tip = 'calc'
+		elif levo in ['komentiraj', 'prosim komentiraj']:
+			self.tip = 'komentar'
+
 	def __str__(self):
 		return str(self.line)
+	
 	def v_generate(self):
-		self.function = generate_variables(self.line.split(':')[1].strip(' '))
+		self.function = generate_variables(self.desno)
 		#print('generated'+str(self.function))
 	def f_generate(self):
-		self.function = generate_function(self.line.split(':')[1].strip(' '))
+		self.function = name_to_func[self.desno]
+	def push(self):
+		return self.desno
+	def eat(self):
+		return self.desno
 	def execute(self):
 		return self.function
+	def calculate(self):
+		return minus_to_f[self.desno]

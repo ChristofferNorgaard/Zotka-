@@ -1,1 +1,12 @@
-prosim definiraj: narmoje število[sedemsto-sedeminsedemdeset}
+prosim definiraj: intmoje število[tisoč-ena}
+prosim potisni: moje število
+prosim definiraj: int   [sedem}
+prosim naredi: preberi_celo_število|T
+prosim pojej:    
+prosim naredi: preberi_celo_število|T
+prosim pojej: moje število
+prosim potisni:    
+potisni: moje število
+izračunaj: --
+izračunaj: --
+naredi: izpiši_celo_število|T
