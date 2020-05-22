@@ -4,14 +4,18 @@ import standardLibrary.numbery as numbery
 
 class NAR(INT):
 	def __init__(self, value):
-		if numbery.from_num(value) < 3:
-			raise Exception('nar je lahko le naravno število večje od 2.')
-		Variable.__init__(self, 'nar', value)
 		try:
-			self.real_value = numbery.from_num(value)
-		except Exception as error:
-			print(error)
-			raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
+			v = int(value)
+		except:
+			try:
+				v = numbery.from_num(value)
+			except Exception as error:
+				print(error)
+				raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
+		if v < 3:
+			raise Exception('nar je lahko le naravno število večje od 2.')
+		Variable.__init__(self, 'nar', numbery.to_num(v))
+		self.real_value = v
 
 	#binary operators ###################################################################
 	def __add__(self, other):

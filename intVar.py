@@ -3,14 +3,19 @@ import standardLibrary.numbery as numbery
 
 class INT(Variable):
 	def __init__(self, value):
-		Variable.__init__(self, 'int', value)
 		try:
-			self.real_value = numbery.from_num(value)
-		except Exception as error:
-			print(error)
-			raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
+			v = int(value)
+		except:
+			try:
+				v = numbery.from_num(value)
+			except Exception as error:
+				print(error)
+				raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
+		Variable.__init__(self, 'int', numbery.to_num(v))
+		self.real_value = v
 
-	#binary operators
+
+	#binary operators ###################################################
 	def __add__(self, other):
 		return INT(numbery.to_num(self.real_value + other.real_value))
 	def __sub__(self, other):

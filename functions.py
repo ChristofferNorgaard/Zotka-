@@ -49,32 +49,73 @@ def superprint(sklad):
 	print(sklad.pop(), end=sklad.pop(), flush=bool(sklad.pop()))
 
 def krat(sklad):
-	sklad.append(float(sklad.pop())*float(sklad.pop()))
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a*b)
 
 def plus(sklad):
-	sklad.append(float(sklad.pop())+float(sklad.pop()))
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a+b)
+	else:
+		sklad.append(float(a)+float(b))
 
 def minus(sklad):
-	sklad.append(float(sklad.pop())-float(sklad.pop()))
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a-b)
+	else:
+		sklad.append(float(a)-float(b))
+
 
 def deljeno(sklad):
-	sklad.append(float(sklad.pop())/float(sklad.pop()))
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a/b)
+	else:
+		sklad.append(float(a)/float(b))
+
 
 def na(sklad):
-	sklad.append(float(sklad.pop())**float(sklad.pop()))
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a**b)
+	else:
+		sklad.append(float(a)**float(b))
 
 def koren(sklad):
-	sklad.append(float(sklad.pop())**(1/float(sklad.pop())))
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a**float(1/b))
+	else:
+		sklad.append(float(a)**float(1/float(b)))
 
 def faktorel(sklad):
-	sklad.append(gamma(float(sklad.pop()) + 1))
+	a = sklad.pop()
+	sklad.append(type(a)(gamma(float(a) + 1)))
 
 def št_diagonal(sklad):
-	n=int(sklad.pop())+int(sklad.pop())
-	sklad.append(n*(n-3)/2)
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		n = a + b
+		sklad.append(n*(n-type(a)(3))/type(a)(2))
+	else:
+		n=int(a)+int(b)
+		sklad.append(type(a)(n*(n-3)/2))
+		
+
 
 def ploščina_elipse(sklad):
-	sklad.append(float(sklad.pop())*float(sklad.pop())*pi)
+	a = sklad.pop()
+	b = sklad.pop()
+	sklad.append(a*b*pi)
 
 def deljeno_z_ena(sklad):
 	pass

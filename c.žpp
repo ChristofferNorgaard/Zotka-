@@ -1,0 +1,24 @@
+prosim definiraj: nizvprašanje[Napiši eno število: }
+prosim definiraj: inta[}
+prosim definiraj: intb[}
+prosim potisni: vprašanje
+prosim naredi: izpiši|T
+prosim naredi: preberi_celo_število|T
+prosim pojej: a
+prosim potisni: a
+prosim naredi: izpiši|T
+prosim potisni: vprašanje
+prosim naredi: izpiši|T
+prosim naredi: preberi_celo_število|T
+prosim pojej: b
+prosim potisni: b
+prosim naredi: izpiši|T
+prosim potisni: a
+potisni: b
+izračunaj: ---
+definiraj: intvsota[}
+pojej: vsota
+potisni: vsota
+naredi: izpiši|T
+potisni: vsota
+naredi: izpiši_celo_število|T
