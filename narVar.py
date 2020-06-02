@@ -1,21 +1,60 @@
 from standardLibrary.variables import Variable
 from standardLibrary.intVar import INT
+from standardLibrary.uloVar import ULO
 import standardLibrary.numbery as numbery
 
 class NAR(INT):
 	def __init__(self, value):
-		try:
+		if type(value) == int:
+			v = value
+			Variable.__init__(self, 'nar', numbery.to_num(v))
+			self.real_value = v
+			if not v > 2:
+				raise Exception('nar je lahko le naravno število večje od 2.')
+
+		elif type(value) == float:
 			v = int(value)
-		except:
-			try:
-				v = numbery.from_num(value)
-			except Exception as error:
-				print(error)
-				raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
-		if v < 3:
-			raise Exception('nar je lahko le naravno število večje od 2.')
-		Variable.__init__(self, 'nar', numbery.to_num(v))
-		self.real_value = v
+			Variable.__init__(self, 'nar', numbery.to_num(v))
+			self.real_value = v
+			if not v > 2:
+				raise Exception('nar je lahko le naravno število večje od 2.')
+			
+		elif type(value) == INT:
+			if value.real_value > 2:
+				v = value.real_value
+				Variable.__init__(self, 'nar', value.value)
+				self.real_value = v
+			else:
+				raise Exception('nar je lahko le naravno število večje od 2.')
+		
+		elif type(value) == NAR:
+			v = value.real_value
+			Variable.__init__(self, 'nar', value.value)
+			self.real_value = v
+			if not v > 2:
+				raise Exception('nar je lahko le naravno število večje od 2.')
+
+		elif type(value) == ULO:
+			v = int(value)
+			Variable.__init__(self, 'nar', numbery.to_num(v))
+			self.real_value = v
+			if not v > 2:
+				raise Exception('nar je lahko le naravno število večje od 2.')
+
+		elif type(value) == str:
+			if len(value) > 0 and value[0] != '-' and '-' in value: #je napisano z besedo
+				v = value
+				Variable.__init__(self, 'nar', v)
+				self.real_value = numbery.from_num(v)
+				if not self.real_value > 2:
+					raise Exception('nar je lahko le naravno število večje od 2.')
+				
+			else:
+				Variable.__init__(self, 'nar', numbery.to_num(v))
+				self.real_value = numbery.from_num(self.value)
+				if not self.real_value > 2:
+					raise Exception('nar je lahko le naravno število večje od 2.')
+				
 
 	#binary operators ###################################################################
 	def __add__(self, other):
@@ -72,6 +111,4 @@ class NAR(INT):
 		return self.real_value > other.real_value
 	#################################################################
 	#################################################################
-	def from_sklad(value):
-		v = int(value)
-		return NAR(v)
+	

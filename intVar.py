@@ -3,16 +3,41 @@ import standardLibrary.numbery as numbery
 
 class INT(Variable):
 	def __init__(self, value):
-		try:
+		if type(value) == int:
+			v = value
+			Variable.__init__(self, 'int', numbery.to_num(v))
+			self.real_value = v
+
+		elif type(value) == float:
 			v = int(value)
-		except:
-			try:
-				v = numbery.from_num(value)
-			except Exception as error:
-				print(error)
-				raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
-		Variable.__init__(self, 'int', numbery.to_num(v))
-		self.real_value = v
+			Variable.__init__(self, 'int', numbery.to_num(v))
+			self.real_value = v
+			
+		elif type(value) == INT:
+			v = value.real_value
+			Variable.__init__(self, 'int', value.value)
+			self.real_value = v
+		
+		elif type(value) == NAR:
+			v = value.real_value
+			Variable.__init__(self, 'int', value.value)
+			self.real_value = v
+
+		elif type(value) == ULO:
+			v = int(value)
+			Variable.__init__(self, 'int', numbery.to_num(v))
+			self.real_value = v
+
+		elif type(value) == str:
+			if len(value) > 0 and value[0] != '-' and '-' in value: #je napisano z besedo
+				v = int(value)
+				Variable.__init__(self, 'int', numbery.from_num(v))
+				self.real_value = v
+			else:
+				v = int(value)
+				Variable.__init__(self, 'int', numbery.to_num(v))
+				self.real_value = v
+
 
 
 	#binary operators ###################################################
@@ -23,13 +48,11 @@ class INT(Variable):
 	def __mul__(self, other):
 		return INT(numbery.to_num(self.real_value * other.real_value))
 	def __truediv__(self, other):
-		return INT(numbery.to_num(self.real_value // other.real_value))
-	def __floordiv__(self, other):
 		return INT(numbery.to_num(round(self.real_value / other.real_value)))
+	def __floordiv__(self, other):
+		return INT(numbery.to_num(self.real_value // other.real_value))
 	def __mod__(self, other):
 		return INT(numbery.to_num(self.real_value % other.real_value))
-	def __pow__(self, other):
-		return INT(numbery.to_num(self.real_value ** other.real_value))
 	#unary operators
 	def __str__(self):
 		return self.value
@@ -70,6 +93,3 @@ class INT(Variable):
 		return self.real_value > other.real_value
 	###################################################################
 	###################################################################
-	def from_sklad(value):
-		v = int(value)
-		return NAR(v)
