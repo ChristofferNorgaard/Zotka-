@@ -1,4 +1,6 @@
 from standardLibrary.numbery import from_num, to_num
+from math import gamma
+from math import pi
 '''
 pojej - vzame vrednost iz sklad
 potisni - doda vrednost na sklad
@@ -23,21 +25,97 @@ izpisovanje:
 
 
 '''
-def printf(text):
-	try:
-		print(''.join(text))
-	except:
-		print(text)
+def printf(sklad):
+	print(sklad.pop())
+
+def printint(sklad):
+	print(int(sklad.pop()))
+
 		
-def inputf(question):
-	try:
-		r = input(''.join(question))
-		return r
-	except:
-		return input(question)
+def inputf(sklad):
+	r = input()
+	sklad.append(r)
 
-def inputint(question):
-	return to_num(inputf(question))
+def inputint(sklad):
+	sklad.append(to_num(input()))
 
-def inputulo(question):
-	return '$'.join([to_num(x) for x in inputf(question).split('/')])
+def inputulo(sklad):
+	sklad.append('$'.join([to_num(x) for x in input().split('/')]))
+
+def print_and_flush(sklad):
+	print(sklad.pop(), flush=True)
+
+def superprint(sklad):
+	print(sklad.pop(), end=sklad.pop(), flush=bool(sklad.pop()))
+
+def krat(sklad):
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a*b)
+
+def plus(sklad):
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a+b)
+	else:
+		sklad.append(float(a)+float(b))
+
+def minus(sklad):
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a-b)
+	else:
+		sklad.append(float(a)-float(b))
+
+
+def deljeno(sklad):
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a/b)
+	else:
+		sklad.append(float(a)/float(b))
+
+
+def na(sklad):
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a**b)
+	else:
+		sklad.append(float(a)**float(b))
+
+def koren(sklad):
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		sklad.append(a**float(1/b))
+	else:
+		sklad.append(float(a)**float(1/float(b)))
+
+def faktorel(sklad):
+	a = sklad.pop()
+	sklad.append(type(a)(gamma(float(a) + 1)))
+
+def št_diagonal(sklad):
+	a = sklad.pop()
+	b = sklad.pop()
+	if type(a) == type(b):
+		n = a + b
+		sklad.append(n*(n-type(a)(3))/type(a)(2))
+	else:
+		n=int(a)+int(b)
+		sklad.append(type(a)(n*(n-3)/2))
+		
+
+
+def ploščina_elipse(sklad):
+	a = sklad.pop()
+	b = sklad.pop()
+	sklad.append(a*b*pi)
+
+def deljeno_z_ena(sklad):
+	pass
