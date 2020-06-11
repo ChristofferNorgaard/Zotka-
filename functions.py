@@ -1,4 +1,5 @@
 from standardLibrary.numbery import from_num, to_num
+from standardLibrary.sezVar import SEZ
 from math import gamma
 from math import pi
 '''
@@ -51,13 +52,12 @@ def superprint(sklad):
 def krat(sklad):
 	a = sklad.pop()
 	b = sklad.pop()
-	if type(a) == type(b):
-		sklad.append(a*b)
+	sklad.append(a*b)
 
 def plus(sklad):
 	a = sklad.pop()
 	b = sklad.pop()
-	if type(a) == type(b):
+	if type(a) == type(b) or type(a) == SEZ:
 		sklad.append(a+b)
 	else:
 		sklad.append(float(a)+float(b))
@@ -65,21 +65,22 @@ def plus(sklad):
 def minus(sklad):
 	a = sklad.pop()
 	b = sklad.pop()
-	if type(a) == type(b):
+	if type(a) == type(b) or type(a) == SEZ:
 		sklad.append(a-b)
 	else:
+		print(type(a))
+		print(type(b))
 		sklad.append(float(a)-float(b))
 
 
 def deljeno(sklad):
 	a = sklad.pop()
 	b = sklad.pop()
-	if type(a) == type(b):
+	if type(a) == type(b) or type(a) == SEZ:
 		sklad.append(a/b)
 	else:
 		sklad.append(float(a)/float(b))
-
-
+		
 def na(sklad):
 	a = sklad.pop()
 	b = sklad.pop()

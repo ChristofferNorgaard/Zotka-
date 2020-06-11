@@ -8,22 +8,40 @@ def lcm(a, b):
 
 class ULO(Variable):
 	def __init__(self, value):
-		up, down = value.split('$')
-		Variable.__init__(self, 'ulo', (up, down))
-		try:
-			self.real_up = numbery.from_num(up)
-			self.real_down = numbery.from_num(down)
-			if self.real_down < 0:
-				self.real_down *= -1
-				self.real_up *= -1
-			tmp=gcd(self.real_down, self.real_up)
-			self.real_up /= tmp
-			self.real_down /= tmp
-			self.value = (numbery.to_num(self.real_up), numbery.to_num(self.real_down))
-			del tmp
-		except Exception as error:
-			print(error)
-			raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
+		if '$' in value:
+			up, down = value.split('$')
+			Variable.__init__(self, 'ulo', (up, down))
+			try:
+				self.real_up = numbery.from_num(up)
+				self.real_down = numbery.from_num(down)
+				if self.real_down < 0:
+					self.real_down *= -1
+					self.real_up *= -1
+				tmp=gcd(self.real_down, self.real_up)
+				self.real_up /= tmp
+				self.real_down /= tmp
+				self.value = (numbery.to_num(self.real_up), numbery.to_num(self.real_down))
+				del tmp
+			except Exception as error:
+				print(error)
+				raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
+		else:
+			up, down = from_float(float(value)).value
+			Variable.__init__(self, 'ulo', (up, down))
+			try:
+				self.real_up = numbery.from_num(up)
+				self.real_down = numbery.from_num(down)
+				if self.real_down < 0:
+					self.real_down *= -1
+					self.real_up *= -1
+				tmp=gcd(self.real_down, self.real_up)
+				self.real_up /= tmp
+				self.real_down /= tmp
+				self.value = (numbery.to_num(self.real_up), numbery.to_num(self.real_down))
+				del tmp
+			except Exception as error:
+				print(error)
+				raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
 
 	#binary operators
 	def __add__(self, other):
@@ -76,7 +94,7 @@ class ULO(Variable):
 		return float(self) > float(other)
 	###################################################################
 	###################################################################
-	def from_sklad(value):
+	def from_float(value):
 		val=float(value)
 		v = int(val)
 		o = val - v

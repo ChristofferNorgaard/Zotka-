@@ -42,16 +42,16 @@ class NAR(INT):
 				raise Exception('nar je lahko le naravno število večje od 2.')
 
 		elif type(value) == str:
-			if len(value) > 0 and value[0] != '-' and '-' in value: #je napisano z besedo
-				v = value
-				Variable.__init__(self, 'nar', v)
-				self.real_value = numbery.from_num(v)
+			if ('1' in value or '2' in value or '3' in value or '4' in value or '5' in value or '6' in value or '7' in value or '8' in value or '9' in value): #je napisano z besedo
+				Variable.__init__(self, 'nar', numbery.to_num(value))
+				self.real_value = numbery.from_num(self.value)
 				if not self.real_value > 2:
 					raise Exception('nar je lahko le naravno število večje od 2.')
 				
 			else:
-				Variable.__init__(self, 'nar', numbery.to_num(v))
-				self.real_value = numbery.from_num(self.value)
+				v = value
+				Variable.__init__(self, 'nar', v)
+				self.real_value = numbery.from_num(v)
 				if not self.real_value > 2:
 					raise Exception('nar je lahko le naravno število večje od 2.')
 				

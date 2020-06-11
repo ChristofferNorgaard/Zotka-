@@ -2,14 +2,17 @@ from standardLibrary.variables import Variable
 from standardLibrary.intVar import INT
 from standardLibrary.narVar import NAR
 from standardLibrary.uloVar import ULO
+from standardLibrary.sezVar import SEZ
 from standardLibrary.functions import *
+import math
+from standardLibrary.Matematika import *
 
-type_to_var = {'int':INT, 'nar':NAR, 'ulo':ULO, 'flo':float, 'niz':str, 'sez':list, 'mno':set, 'slo':dict}
-name_to_func = {'izpiši|T' : printf, 'preberi|T' : inputf, 'preberi_celo_število|T' : inputint, 'preberi_ulomek|T':inputulo, 'izpiši|izplakni|T': print_and_flush, 'izpiši|z določenim koncem in izplakni(da/ne)T' : superprint, 'izpiši_celo_število|T' : printint}
+type_to_var = {'int':INT, 'nar':NAR, 'ulo':ULO, 'flo':float, 'niz':str, 'sez':SEZ, 'mno':set, 'slo':dict}
+name_to_func = {'izpiši|T' : printf, 'preberi|T' : inputf, 'preberi_število|T' : inputint, 'preberi_ulomek|T':inputulo, 'izpiši|izplakni|T': print_and_flush, 'izpiši|z določenim koncem in izplakni(da/ne)T' : superprint, 'izpiši_celo_število|T' : printint}
 minus_to_f = { '-' : krat, '--' : plus, '---': minus, '----': deljeno, '-----': na, '------': koren, '-------': faktorel, '--------': št_diagonal, '---------': ploščina_elipse, '----------': deljeno_z_ena}
 
 def check_for_kindness(program):
-	zacetki = ['naredi', 'definiraj', 'preveri', 'potisni', 'pojej', 'izračunaj', 'komentiraj']
+	zacetki = {'naredi', 'definiraj', 'preveri', 'potisni', 'pojej', 'izračunaj', 'komentiraj', 'poskoči na', 'poskoči za', 'uvozi', 'Prosim poslovi se od nas in umri, potem se vrni kot velika ŽOTKA, da te bomo lahko še uporabljali in imeli radi.'}
 	prosim_naredi=0
 	naredi=0
 	x=1
@@ -22,7 +25,7 @@ def check_for_kindness(program):
 		else:
 			if tmp != '':
 				print('Napaka v vrstici %d.' %x)
-				return 1
+				return False
 		x+=1
 	
 	if naredi*2 == prosim_naredi:
@@ -52,7 +55,7 @@ def generate_variables(s):
 	########################### Preverjanje, da ni številka napisana s številkami
 	if tip in [INT, NAR, ULO]:
 		for x in range(10):
-			if x in value:
+			if str(x) in str(value):
 				raise Exception('Narobe napisana številka.')
 	###########################
 	fn.append((tip(value), name))
@@ -87,6 +90,10 @@ class Line:
 		elif levo == 'Prosim poslovi se od nas in umri, potem se vrni kot velika ŽOTKA, da te bomo lahko še uporabljali in imeli radi.':
 			print('<ž++: Zbogom. Živite brez mene do mojega ponovnega klica.>')
 			self.tip = 'stop'
+		elif levi in ['uvozi', 'prosim uvozi']:
+			self.tip = 'preskoči me'
+			if self.desno == '<žpp - računstvo++>':
+				minus_to_f.update(mfs) # dodamo matematične funkcije
 
 	def __str__(self):
 		return str(self.line)
