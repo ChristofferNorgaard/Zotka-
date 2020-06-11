@@ -7,6 +7,9 @@ form = variables.totype
 flags = sys.argv[1:]
 
 def izvedi_vrstico(sklad, vars, line, tmp):
+	#print(vars)
+	#print(sklad)
+	#print()
 	if tmp.tip == 'def':
 		tmp.v_generate()
 		if len(tmp.execute()) > 0:

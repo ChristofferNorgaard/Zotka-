@@ -1,9 +1,12 @@
-prosim definiraj: inthaha[}
-definiraj: narx[dvesto-dvanajst}
-prosim definiraj: ulon[osem$tri}
-potisni: n
+prosim definiraj: nizvprašanje[Napiši svoje ime: }
+prosim potisni: vprašanje
 prosim naredi: izpiši|T
-prosim naredi: preberi_ulomek|T
-pojej: n
-prosim potisni: n
-prosim naredi: izpiši|T
+prosim definiraj: nizime[}
+prosim naredi: preberi|T
+prosim pojej: ime
+prosim definiraj: nizspredaj[Ime ti je }
+prosim potisni: ime
+potisni: spredaj
+izračunaj: --
+naredi: izpiši|T
+komentiraj: nič

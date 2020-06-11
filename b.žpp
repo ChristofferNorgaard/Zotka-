@@ -1,12 +1,24 @@
-prosim definiraj: intmoje število[tisoč-ena}
-prosim potisni: moje število
+prosim definiraj: niz vprašanje  [Napiši eno število: }
+prosim definiraj: int  [}
+prosim potisni:   
 prosim definiraj: int   [sedem}
+prosim potisni:  vprašanje  
+prosim naredi: izpiši|T
 prosim naredi: preberi_celo_število|T
 prosim pojej:    
-prosim naredi: preberi_celo_število|T
-prosim pojej: moje število
 prosim potisni:    
-potisni: moje število
+prosim naredi: izpiši|T
+prosim potisni:  vprašanje  
+naredi: izpiši|T
+prosim naredi: preberi_celo_število|T
+prosim pojej:   
+prosim potisni:    
+potisni:   
 izračunaj: --
 izračunaj: --
+prosim potisni:   
+prosim naredi: izpiši|T
 naredi: izpiši_celo_število|T
+komentiraj: to je neuporaben komentar, brez katerega program ne dela
+komentiraj: še en tak komentar
+komentiraj: še en
