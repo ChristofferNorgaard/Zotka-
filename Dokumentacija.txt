@@ -1,0 +1,53 @@
+Dokumentacija
+Zgradba programa
+Program v Žotki++ je sestavljen iz vrstic. Vsaka vrstica je sestavljena iz dveh delov, ki sta ločena z dvopičjem in presledkom. V prvem delu se nahaja vrsta dejanja, ki je napisan v desnem delu. Levi del se lahko začne z besedo prosim ali brez. Razmerje med temi povedmi mora biti 2:1.
+Spremenljivke
+Stavek se začne z definiraj ali prosim definiraj. Sledi tip spremenljivke potem takoj ime spremenljivke, v [} oklepajih pa vrednost. 
+Primer: "prosim definiraj: nizmoja spremenljivka[Pozdravljeni!}"
+Vrsta spremenljivke je napisana v treh črkah, lahko bi bila tudi v več. Ime spremenljivke je "moja spremenljivka", če bi po besedi "niz" dodali presledek, bi se pa imenovala " moja spremenljivka". Ima vrednost "Pozdravljeni!".
+Niz
+Spremenljivke tipa niz podpirajo seštevanje, tako se jih združuje.
+Nar
+Nar predstavlja naravno število večje od dva. Napisati ga je treba z besedo. Lahko se ga potencira.
+Int
+Celo število, ne more se ga potencirati.
+Ulo
+Ulo predstavlja ulomek.
+Sez
+Sez je seznam. Če ga pomnožimo z drugim seznamom, dobi prvi vse elemente drugega na konec, s seštevanjem se elemente dodaja, pri odštevanju se dobi element, pri deljenju z nič se ga uredi, pri deljenju z drugimi števili pa se elementi naključno razporedijo. Absolutna vrednost vrne njegovo dolžino. Številčenje elementov se začne s tri, pri prekoračitvi seznama se vrne na začetek.
+Računanje
+Funkcija vedno vzame element ali elemente na skladu, in tja vrne tudi rezultat. Na sklad se spravijo elementi s stavkom: 
+potisni: ime spremenljivke
+V spremenljivko pa se ga spravi z 
+pojej: ime spremenljivke
+operacije:
+-	- krat
+-	-- plus
+-	--- minus
+-	---- deljeno
+-	----- na
+-	------ koren
+-	------- faktorel
+-	-------- število diagonal pravilnega večkotnika seštevka teh dveh števil
+-	--------- ploščina elipse s tema polmeroma
+-	---------- deljeno z ena
+•	+  kvadratni koren
+•	++ gamma funkcija
+•	+++ število pi
+•	++++ logaritem števila na osnovi drugega števila
+•	+++++ največji skupni delitelj
+•	teta pehta najmanjši skupni večkratnik
+•	++++++ absolutna vrednost
+•	komunist povprečna vrednost
+•	beži najmanjša vrednost
+•	nebeži največja vrednost
+Drugi del operacij je treba uvozit s stavkom ''uvozi: <žpp - računstvo++>''
+ 
+Obstajajo tudi funkcije za vhod in izhod.
+•	preberi_število|T
+•	izpiši|T
+•	izpiši_celo_število|T
+•	izpiši|izplakni|T
+•	izpiši|z določenim koncem in izplakni(da/ne)T
+•	preberi_ulomek|T
+•	preberi|T
