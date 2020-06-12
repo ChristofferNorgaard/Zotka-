@@ -29,14 +29,14 @@ class INT(Variable):
 			self.real_value = v
 
 		elif type(value) == str:
-			if len(value) > 0 and value[0] != '-' and '-' in value: #je napisano z besedo
-				v = int(value)
-				Variable.__init__(self, 'int', numbery.from_num(v))
-				self.real_value = v
+			if ('1' in value or '2' in value or '3' in value or '4' in value or '5' in value or '6' in value or '7' in value or '8' in value or '9' in value): #je napisano z besedo
+				Variable.__init__(self, 'nar', numbery.to_num(value))
+				self.real_value = numbery.from_num(self.value)
+				
 			else:
-				v = int(value)
-				Variable.__init__(self, 'int', numbery.to_num(v))
-				self.real_value = v
+				v = value
+				Variable.__init__(self, 'nar', v)
+				self.real_value = numbery.from_num(v)
 
 
 

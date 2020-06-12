@@ -6,10 +6,15 @@ import standardLibrary.variables as variables
 form = variables.totype
 flags = sys.argv[1:]
 
+#Če ne razumeš zakaj so katere spremenljivke seznami, je to zato, ker jih tako lahko uporabljamo kot pointerje na del spomina
+#Tudi slovarji in vse kar je narejeno s v teh programih s class-i se obnašajo tako.
+
 def izvedi_vrstico(sklad, vars, line, tmp):
 	#print(vars)
 	#print(sklad)
 	#print()
+
+	#vrstico izvedemo glede na njeno vrsto
 	if tmp.tip == 'def':
 		tmp.v_generate()
 		if len(tmp.execute()) > 0:
@@ -40,10 +45,11 @@ def izvedi_vrstico(sklad, vars, line, tmp):
 		sys.exit(0)
 
 def naredi(program, ln):
-	sklad=[]
+	sklad=[] # če spremenimo spremenljivko v skladu, spremenimo tudi njeno vrednost v vars, razen če gre za primitivne tipe. npr append (--) v seznam (sez) 
 	vars={}
 	lines=[]
 	line = [0]
+	#premikamo se vrstico po vrstico
 	while line[0] < len(program):
 		#print(sklad)
 		ln[0] = line[0]
@@ -55,7 +61,7 @@ def naredi(program, ln):
 	if '-i' in flags:
 		cmd(program, sklad, vars, line, lines, ln)
 
-def cmd(program, sklad, vars, line, lines, ln):
+def cmd(program, sklad, vars, line, lines, ln): # ta funkcija je ukazna vrstica
 	while True:
 		try:
 			ln[0] = line[0]
@@ -78,7 +84,7 @@ def main():
 	
 	ln=[0]
 	if '-developing_mode' in flags:
-		naredi(program, ln)		
+		naredi(program, ln)	#ln je seznam ker lahko tako vse funkcije, ki ga dobijo kot argument spreminjajo isto spremenljivko, na istem mestu v spominu
 	else:
 		try:
 			naredi(program, ln)
@@ -86,38 +92,6 @@ def main():
 			print('Napaka v vrstici %d.' %(ln[0]+3)) #+3 je samo za zmedo
 			print(error)
 			return 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	
 if __name__ == '__main__':

@@ -31,6 +31,26 @@ def kom(sklad): #povprečje
 		s += float(x)
 		dol += 1
 	s/=dol
-	return s
+	sklad.append(s)
 
-mfs = {'+' : SQRT, '++' : GAMMA, '+++' : PI, '++++' : LOG, '+++++' : GCD, 'teta pehta' : LCA, '++++++' : abs, 'komunist' : kom, 'beži' : min, 'nebeži' : max}
+def ABS(sklad):
+	sklad.append(abs(sklad.pop()))
+
+def MIN(sklad):
+	a = sklad.pop()
+	r = a[0]
+	for x in a:
+		if r > x:
+			r = x
+	sklad.append(r)
+
+def MAX(sklad):
+	a = sklad.pop()
+	r = a[0]
+	for x in a:
+		if r < x:
+			r = x
+	sklad.append(r)
+
+#mfs je slovar, ključi so funkcije v žotki, vrednosti pa funkcije, ki jih z njimi pokličemo
+mfs = {'+' : SQRT, '++' : GAMMA, '+++' : PI, '++++' : LOG, '+++++' : GCD, 'teta pehta' : LCA, '++++++' : ABS, 'komunist' : kom, 'beži' : MIN, 'nebeži' : MAX}

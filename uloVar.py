@@ -24,7 +24,7 @@ class ULO(Variable):
 				del tmp
 			except Exception as error:
 				print(error)
-				raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
+				raise Exception('Napaka pri zapisu števila.')
 		else:
 			up, down = from_float(float(value)).value
 			Variable.__init__(self, 'ulo', (up, down))
@@ -41,7 +41,7 @@ class ULO(Variable):
 				del tmp
 			except Exception as error:
 				print(error)
-				raise Exception('Napaka pri zapisu števila. Omejitev je 999 999 999 999. Pri večjih številih je dogajanje nepredvidljivo.')
+				raise Exception('Napaka pri zapisu števila.')
 
 	#binary operators
 	def __add__(self, other):

@@ -7,6 +7,8 @@ from standardLibrary.functions import *
 import math
 from standardLibrary.Matematika import *
 
+
+#slovarji imen uporabljenih v žotki++ in funkcij ter tipov definiranih v teh programih
 type_to_var = {'int':INT, 'nar':NAR, 'ulo':ULO, 'flo':float, 'niz':str, 'sez':SEZ, 'mno':set, 'slo':dict}
 name_to_func = {'izpiši|T' : printf, 'preberi|T' : inputf, 'preberi_število|T' : inputint, 'preberi_ulomek|T':inputulo, 'izpiši|izplakni|T': print_and_flush, 'izpiši|z določenim koncem in izplakni(da/ne)T' : superprint, 'izpiši_celo_število|T' : printint}
 minus_to_f = { '-' : krat, '--' : plus, '---': minus, '----': deljeno, '-----': na, '------': koren, '-------': faktorel, '--------': št_diagonal, '---------': ploščina_elipse, '----------': deljeno_z_ena}
@@ -71,6 +73,7 @@ class Line:
 		levo = line.split(':')[0]
 		self.desno = line[len(levo)+2:] 
 		
+		#ugotavljanje vrste ukazov, ki sledijo
 		if levo in ['definiraj', 'prosim definiraj']:
 			self.tip = 'def'
 		elif levo in ['naredi', 'prosim naredi']:
