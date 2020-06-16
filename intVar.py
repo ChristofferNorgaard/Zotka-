@@ -30,12 +30,12 @@ class INT(Variable):
 
 		elif type(value) == str:
 			if ('1' in value or '2' in value or '3' in value or '4' in value or '5' in value or '6' in value or '7' in value or '8' in value or '9' in value): #je napisano z besedo
-				Variable.__init__(self, 'nar', numbery.to_num(value))
+				Variable.__init__(self, 'int', numbery.to_num(value))
 				self.real_value = numbery.from_num(self.value)
 				
 			else:
 				v = value
-				Variable.__init__(self, 'nar', v)
+				Variable.__init__(self, 'int', v)
 				self.real_value = numbery.from_num(v)
 
 
