@@ -38,6 +38,9 @@ class SEZ(Variable):
 	def __str__(self): # enako kot pythonov str(list)
 		return str(self.value)
 
+	def __pow__(self, other):
+		del self.value[int(other)]
+		return self
 
 			
 	
