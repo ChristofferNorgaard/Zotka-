@@ -4,6 +4,7 @@ import standardLibrary.numbery as numbery
 import standardLibrary.grammar as grammar
 import standardLibrary.variables as variables
 from standardLibrary.Matematika import mfs
+from standardLibrary.primerjave import primerjave
 form = variables.totype
 flags = sys.argv[1:]
 
@@ -36,6 +37,13 @@ class Vrsta:
 			program.st_vrstice = numbery.from_num(self.ukaz)
 		elif self.tip == 'hop':
 			program.st_vrstice += numbery.from_num(self.ukaz)
+		
+		elif self.tip == 'jmpp':
+			if program.sklad.pop().value == 'Da':
+				program.st_vrstice = numbery.from_num(self.ukaz)
+		elif self.tip == 'hopp':
+			if program.sklad.pop().value == 'Da':
+				program.st_vrstice += numbery.from_num(self.ukaz)
 
 		elif self.tip == 'stop':
 			sys.exit(0)
@@ -43,6 +51,10 @@ class Vrsta:
 		elif self.tip == 'uvozi':
 			if self.ukaz == '<žpp - računstvo++>':
 				grammar.minus_to_f.update(mfs) # dodamo matematične funkcije
+		
+		elif self.tip == 'primerjaj':
+			primerjave[self.ukaz](program.sklad)
+
 
 
 
