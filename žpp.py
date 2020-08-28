@@ -18,7 +18,7 @@ class Vrsta:
 			program.nova_spremenljivka(grammar.generate_variables(self.ukaz))
 		
 		elif self.tip == 'do':
-			funkcija = grammar.name_to_func(self.ukaz)
+			funkcija = grammar.name_to_func[self.ukaz]
 			value = funkcija(program.sklad)
 			if value != None:
 				program.sklad.append(value)
@@ -30,7 +30,7 @@ class Vrsta:
 			program.spremenljivke[self.ukaz] = form(type(program.spremenljivke[self.ukaz]), program.sklad.pop()) #popravi glede na tipe
 
 		elif self.tip == 'calc':
-			grammar.minus_to_f(program.sklad)
+			grammar.minus_to_f[program.sklad]
 
 		elif self.tip == 'jmp':
 			program.st_vrstice = numbery.from_num(self.ukaz)
@@ -62,15 +62,18 @@ class Program():
 		x=3 #Števec vrstice zamaknjen za tri, za javljanje napak
 		for st_vrstice in range(len(self.vrstice)):
 			vrstica = self.vrstice[st_vrstice]
+			if vrstica == '' and len(self.vrstice) < 2:
+				del self.vrstice[st_vrstice]
+				continue
 			zacetek, konec = vrstica.split(':')
 
 			if zacetek in ['prosim '+x for x in grammar.zacetki]:
 				prosim_naredi += 1
-				self.vrstice[st_vrstice] = Vrsta(zacetek[7:], konec)
+				self.vrstice[st_vrstice] = Vrsta(zacetek[7:], konec[1:])
 
 			elif zacetek in grammar.zacetki:
 				naredi += 1
-				self.vrstice[st_vrstice] = Vrsta(zacetek, konec)
+				self.vrstice[st_vrstice] = Vrsta(zacetek, konec[1:])
 			else:
 				if zacetek != '':
 					print('Napaka v vrstici %d.' %x)
@@ -107,7 +110,7 @@ class Program():
 def cmd(program):
 	while True:
 		try:
-			vhodna_vrstica = (grammar.Line(input('<ž++> ')))
+			vhodna_vrstica = input('<ž++> ')
 			zacetek, konec = vhodna_vrstica.split(':')
 
 			if zacetek in ['prosim '+x for x in grammar.zacetki]:
@@ -130,10 +133,14 @@ def main():
 		program = Program(f.read().split('\n'))
 
 	if not '-forget_the_kindness' in flags:
-		if not program.preveri_prijaznost():
-			print('Program ni ravno prav prijazen.')
-			return 1
-	
+		try:
+			if not program.preveri_prijaznost():
+				print('Program ni ravno prav prijazen.')
+				return 1
+		except:
+			print('Napaka.')
+			sys.exit(1)
+
 	program.pripravi(0)
 	program.pridobi_tipe_vrstic()
 	if '-developing_mode' in flags:
