@@ -3,108 +3,148 @@ import sys
 import standardLibrary.numbery as numbery
 import standardLibrary.grammar as grammar
 import standardLibrary.variables as variables
+from standardLibrary.Matematika import mfs
 form = variables.totype
 flags = sys.argv[1:]
 
-def izvedi_vrstico(sklad, vars, line, tmp):
-	if tmp.tip == 'def':
-		tmp.v_generate()
-		if len(tmp.execute()) > 0:
-			vars[tmp.execute()[0][1]] = tmp.execute()[0][0]
+class Vrsta:
+	def __init__(self, zacetek, ukaz):
+		self.ukaz = ukaz
+		self.zacetek = zacetek
+		self.tip = None
 	
-	elif tmp.tip == 'do':
-		tmp.f_generate()
-		function = tmp.execute()
-		value = function(sklad)
-		if value != None:
-			sklad.append(value)
+	def izvedi(self, program):
+		if self.tip == 'def':
+			program.nova_spremenljivka(grammar.generate_variables(self.ukaz))
+		
+		elif self.tip == 'do':
+			funkcija = grammar.name_to_func(self.ukaz)
+			value = funkcija(program.sklad)
+			if value != None:
+				program.sklad.append(value)
 
-	elif tmp.tip == 'push':
-		sklad.append(vars[tmp.push()])
+		elif self.tip == 'push':
+			program.sklad.append(program.spremenljivke[self.ukaz])
 
-	elif tmp.tip == 'eat':
-		vars[tmp.eat()] = form(type(vars[tmp.eat()]), sklad.pop()) #popravi glede na tipe
+		elif self.tip == 'eat':
+			program.spremenljivke[self.ukaz] = form(type(program.spremenljivke[self.ukaz]), program.sklad.pop()) #popravi glede na tipe
 
-	elif tmp.tip == 'calc':
-		tmp.calculate()(sklad)
+		elif self.tip == 'calc':
+			grammar.minus_to_f(program.sklad)
 
-	elif tmp.tip == 'jmp':
-		line[0] = numbery.from_num(tmp.desno)
-	elif tmp.tip == 'hop':
-		line[0] += numbery.from_num(tmp.desno)
+		elif self.tip == 'jmp':
+			program.st_vrstice = numbery.from_num(self.ukaz)
+		elif self.tip == 'hop':
+			program.st_vrstice += numbery.from_num(self.ukaz)
 
-	elif tmp.tip == 'stop':
-		sys.exit(0)
+		elif self.tip == 'stop':
+			sys.exit(0)
+		
+		elif self.tip == 'uvozi':
+			if self.ukaz == '<žpp - računstvo++>':
+				grammar.minus_to_f.update(mfs) # dodamo matematične funkcije
 
-def naredi(program, ln):
-	sklad=[]
-	vars={}
-	lines=[]
-	line = [0]
-	while line[0] < len(program):
-		#print(sklad)
-		ln[0] = line[0]
-		lines.append(grammar.Line(program[line[0]]))
-		tmp = lines[-1]
-		izvedi_vrstico(sklad, vars, line, tmp)
-		#print('\b'*3 + str(line[0]), end='')
-		line[0] += 1
-	if '-i' in flags:
-		cmd(program, sklad, vars, line, lines, ln)
 
-def cmd(program, sklad, vars, line, lines, ln):
+
+class Program():
+	def __init__(self, vrstice):
+		self.sklad = []
+		self.spremenljivke = {}
+		self.vrstice = vrstice
+		self.st_vrstice = 0
+	
+	def pripravi(self, n):
+		self.st_vrstice = n
+	
+	def preveri_prijaznost(self):
+		prosim_naredi = 0
+		naredi = 0
+		x=3 #Števec vrstice zamaknjen za tri, za javljanje napak
+		for st_vrstice in range(len(self.vrstice)):
+			vrstica = self.vrstice[st_vrstice]
+			zacetek, konec = vrstica.split(':')
+
+			if zacetek in ['prosim '+x for x in grammar.zacetki]:
+				prosim_naredi += 1
+				self.vrstice[st_vrstice] = Vrsta(zacetek[7:], konec)
+
+			elif zacetek in grammar.zacetki:
+				naredi += 1
+				self.vrstice[st_vrstice] = Vrsta(zacetek, konec)
+			else:
+				if zacetek != '':
+					print('Napaka v vrstici %d.' %x)
+					return False
+			x+=1
+		
+		if naredi*2 == prosim_naredi:
+			return True
+		else:
+			return False
+	
+	def pridobi_tipe_vrstic(self):
+		st_vr = 0
+		while st_vr < len(self.vrstice):
+			trenutna = self.vrstice[st_vr]
+			trenutna.tip = grammar.Tip_vrstice(trenutna.zacetek)
+			st_vr += 1
+	
+	def nova_spremenljivka(self, gen_obj):
+		self.spremenljivke[gen_obj[1]] = gen_obj[0]
+
+	def naredi(self):
+		while self.st_vrstice < len(self.vrstice):
+			self.vrstice[self.st_vrstice].izvedi(self)
+			self.st_vrstice += 1
+		
+		if '-i' in flags:
+			cmd(self)
+	
+	
+
+
+
+def cmd(program):
 	while True:
 		try:
-			ln[0] = line[0]
-			lines.append(grammar.Line(input('<ž++> ')))
-			tmp = lines[-1]
-			izvedi_vrstico(sklad, vars, line, tmp)
-			line[0] += 1
+			vhodna_vrstica = (grammar.Line(input('<ž++> ')))
+			zacetek, konec = vhodna_vrstica.split(':')
+
+			if zacetek in ['prosim '+x for x in grammar.zacetki]:
+				vrstica_za_izvedbo = Vrsta(zacetek[7:], konec)
+
+			elif zacetek in grammar.zacetki:
+				vrstica_za_izvedbo = Vrsta(zacetek, konec)
+
+			vrstica_za_izvedbo.tip = grammar.Tip_vrstice(vrstica_za_izvedbo.zacetek)
+			vrstica_za_izvedbo.izvedi(program)
+
 		except Exception as error:
 			print(error)
+
+
 
 def main():
 	name_target = flags[0]
 	with open(name_target, 'r', encoding = 'utf-8') as f:
-		program = f.read().split('\n')
+		program = Program(f.read().split('\n'))
 
 	if not '-forget_the_kindness' in flags:
-		if not grammar.check_for_kindness(program):
+		if not program.preveri_prijaznost():
 			print('Program ni ravno prav prijazen.')
 			return 1
 	
-	ln=[0]
+	program.pripravi(0)
+	program.pridobi_tipe_vrstic()
 	if '-developing_mode' in flags:
-		naredi(program, ln)		
+		program.naredi()	
 	else:
 		try:
-			naredi(program, ln)
+			program.naredi()
 		except Exception as error:
-			print('Napaka v vrstici %d.' %(ln[0]+3)) #+3 je samo za zmedo
+			print('Napaka v vrstici %d.' %(program.st_vrstice+3)) #+3 je samo za zmedo
 			print(error)
 			return 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
