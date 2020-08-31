@@ -11,10 +11,12 @@ flags = sys.argv[1:]
 class Vrsta:
 	def __init__(self, zacetek, ukaz):
 		self.ukaz = ukaz
+		#print(ukaz)
 		self.zacetek = zacetek
 		self.tip = None
 	
 	def izvedi(self, program):
+		#print(self.zacetek + ': ' + self.ukaz + str(program.sklad))
 		if self.tip == 'def':
 			program.nova_spremenljivka(grammar.generate_variables(self.ukaz))
 		
@@ -31,7 +33,7 @@ class Vrsta:
 			program.spremenljivke[self.ukaz] = form(type(program.spremenljivke[self.ukaz]), program.sklad.pop()) #popravi glede na tipe
 
 		elif self.tip == 'calc':
-			grammar.minus_to_f[program.sklad]
+			grammar.minus_to_f[self.ukaz](program.sklad)
 
 		elif self.tip == 'jmp':
 			program.st_vrstice = numbery.from_num(self.ukaz)
@@ -77,19 +79,20 @@ class Program():
 			if vrstica == '' and len(self.vrstice) < 2:
 				del self.vrstice[st_vrstice]
 				continue
-			zacetek, konec = vrstica.split(':')
+			zacetek = vrstica.split(':')[0]
+			konec = vrstica[len(zacetek)+2:]
 
 			if zacetek in ['prosim '+x for x in grammar.zacetki]:
 				prosim_naredi += 1
-				self.vrstice[st_vrstice] = Vrsta(zacetek[7:], konec[1:])
+				self.vrstice[st_vrstice] = Vrsta(zacetek[7:], konec)
 
 			elif zacetek in grammar.zacetki:
 				naredi += 1
-				self.vrstice[st_vrstice] = Vrsta(zacetek, konec[1:])
+				self.vrstice[st_vrstice] = Vrsta(zacetek, konec)
 			else:
 				if zacetek != '':
 					print('Napaka v vrstici %d.' %x)
-					return False
+					return 'False'
 			x+=1
 		
 		if naredi*2 == prosim_naredi:
@@ -109,6 +112,7 @@ class Program():
 
 	def naredi(self):
 		while self.st_vrstice < len(self.vrstice):
+			#print(self.sklad)
 			self.vrstice[self.st_vrstice].izvedi(self)
 			self.st_vrstice += 1
 		
@@ -144,15 +148,19 @@ def main():
 	with open(name_target, 'r', encoding = 'utf-8') as f:
 		program = Program(f.read().split('\n'))
 
-	if not '-forget_the_kindness' in flags:
+	if (not '-forget_the_kindness' in flags) and (not '-developing_mode' in flags):
 		try:
 			if not program.preveri_prijaznost():
 				print('Program ni ravno prav prijazen.')
 				return 1
-		except:
+		except Exception as error:
 			print('Napaka.')
 			sys.exit(1)
-
+	if '-developing_mode' in flags:		
+		if not program.preveri_prijaznost():
+			print('Program ni ravno prav prijazen.')
+			return 1
+	
 	program.pripravi(0)
 	program.pridobi_tipe_vrstic()
 	if '-developing_mode' in flags:

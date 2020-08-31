@@ -1,0 +1,27 @@
+prosim definiraj: nizvprašanje za uporabnika[Napiši eno število, ki naj mu prištejem 10: }
+prosim definiraj: intštevilo[sedem}
+prosim komentiraj: sem se bo shranil odgovor
+prosim definiraj: intdeset[deset}
+prosim potisni: vprašanje za uporabnika
+prosim naredi: izpiši|T
+prosim naredi: preberi_število|T
+prosim pojej: število
+prosim potisni: število
+prosim potisni: deset
+prosim primerjaj: 3
+prosim primerjaj: 5
+prosim komentiraj: Tu je bila nepotrebna vrstica, sedaj pa le čuva prostor.
+prosim pogojno poskoči za: pet
+prosim definiraj: nizenako je[Število je enako 10!}
+prosim potisni: enako je
+prosim naredi: izpiši|T
+prosim komentiraj: To je prostor za preskok
+komentiraj: To je prostor za preskok
+komentiraj: To je prostor za preskok
+komentiraj: To je prostor za preskok
+potisni: število
+potisni: deset
+izračunaj: --
+naredi: izpiši|T
+komentiraj: Ne izbriši te vrstice
+komentiraj: Ne izbriši te vrstice
