@@ -1,7 +1,8 @@
 try:
-    import standardLibrary.numbery as numbery
+    import StandardLibrary.numbery as numbery
 except ModuleNotFoundError:
     import numbery
+    
 class Variable:
 	types = {'int', 'nar', 'dec', 'ulo', 'flo', 'kom', 'bul', 'črk', 'bes', 'niz', 'sez', 'mno', 'slo', 'str'}
 	def __init__(self, tip, value):

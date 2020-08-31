@@ -1,15 +1,30 @@
-from standardLibrary.variables import Variable
-from standardLibrary.intVar import INT
-from standardLibrary.narVar import NAR
-from standardLibrary.uloVar import ULO
-from standardLibrary.functions import *
+try:
+	from StandardLibrary.variables import Variable
+	from StandardLibrary.intVar import INT
+	from StandardLibrary.narVar import NAR
+	from StandardLibrary.uloVar import ULO
+	from StandardLibrary.sezVar import SEZ
+	from StandardLibrary.strVar import STR
+	from StandardLibrary.sloVar import SLO
+	from StandardLibrary.functions import *
+	from StandardLibrary.Matematika import *
+except:
+	from variables import Variable
+	from intVar import INT
+	from narVar import NAR
+	from uloVar import ULO
+	from sezVar import SEZ
+	from strVar import STR
+	from sloVar import SLO
+	from functions import *
+	from Matematika import *
+	
 import math
-from standardLibrary.Matematika import *
 
-type_to_var = {'int':INT, 'nar':NAR, 'ulo':ULO, 'flo':float, 'niz':str, 'sez':list, 'mno':set, 'slo':dict}
-name_to_func = {'izpiši|T' : printf, 'preberi|T' : inputf, 'preberi_celo_število|T' : inputint, 'preberi_ulomek|T':inputulo, 'izpiši|izplakni|T': print_and_flush, 'izpiši|z določenim koncem in izplakni(da/ne)T' : superprint, 'izpiši_celo_število|T' : printint}
+type_to_var = {'int':INT, 'nar':NAR, 'ulo':ULO, 'flo':float, 'niz':STR, 'sez':SEZ, 'mno':set, 'slo':SLO}
+name_to_func = {'izpiši|T' : printf, 'preberi|T' : inputf, 'preberi_število|T' : inputint, 'preberi_ulomek|T':inputulo, 'izpiši|izplakni|T': print_and_flush, 'izpiši|z določenim koncem in izplakni(da/ne)T' : superprint, 'izpiši_celo_število|T' : printint}
 minus_to_f = { '-' : krat, '--' : plus, '---': minus, '----': deljeno, '-----': na, '------': koren, '-------': faktorel, '--------': št_diagonal, '---------': ploščina_elipse, '----------': deljeno_z_ena}
-zacetki = ['naredi', 'definiraj', 'preveri', 'potisni', 'pojej', 'izračunaj', 'komentiraj', 'poskoči na', 'poskoči za', 'uvozi', 'Prosim poslovi se od nas in umri, potem se vrni kot velika ŽOTKA, da te bomo lahko še uporabljali in imeli radi.']
+zacetki = ['pogojno poskoči na', 'pogojno poskoči za', 'naredi', 'definiraj', 'preveri', 'potisni', 'pojej', 'izračunaj', 'komentiraj', 'poskoči na', 'poskoči za', 'primerjaj', 'uvozi', 'Prosim poslovi se od nas in umri, potem se vrni kot velika ŽOTKA, da te bomo lahko še uporabljali in imeli radi.']
 
 
 
@@ -19,8 +34,12 @@ def generate_variables(s):
 	value = ''
 	x=0
 	while not tip in Variable.types: #iskanje tipa
-		tip+=s[x]
-		x+=1
+		try:
+			tip+=s[x]
+			x+=1
+		except Exception as error:
+			print(s)
+			raise(error)
 	tip=(type_to_var[tip])
 
 	while s[x] != '[': # iskanje imena
@@ -34,7 +53,7 @@ def generate_variables(s):
 	########################### Preverjanje, da ni številka napisana s številkami
 	if tip in [INT, NAR, ULO]:
 		for x in range(10):
-			if x in value:
+			if str(x) in value:
 				raise Exception('Narobe napisana številka.')
 	###########################
 	fn = (tip(value), name)
@@ -57,11 +76,19 @@ def Tip_vrstice(zacetek):
 	elif zacetek == 'poskoči na':
 		tip = 'jmp'
 	elif zacetek == 'poskoči za':
-		tip = 'hop' 
+		tip = 'hop'
+	elif zacetek == 'pogojno poskoči na':
+		tip = 'jmpp'
+	elif zacetek == 'pogojno poskoči za':
+		tip = 'hopp'
 	elif zacetek == 'Prosim poslovi se od nas in umri, potem se vrni kot velika ŽOTKA, da te bomo lahko še uporabljali in imeli radi.':
 		print('<ž++: Zbogom. Živite brez mene do mojega ponovnega klica.>')
 		tip = 'stop'
 	elif zacetek == 'uvozi':
 		tip = 'uvozi'
+	elif zacetek =='primerjaj':
+		tip='primerjaj'
+	else:
+		print('error: ' + str(zacetek))
 	return tip
 

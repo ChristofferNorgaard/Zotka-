@@ -1,6 +1,11 @@
-from standardLibrary.variables import Variable
-from standardLibrary.intVar import INT
-import standardLibrary.numbery as numbery
+try:
+	from StandardLibrary.variables import Variable
+	from StandardLibrary.intVar import INT
+	import StandardLibrary.numbery as numbery
+except:
+	from variables import Variable
+	from intVar import INT
+	import numbery as numbery
 
 class NAR(INT):
 	def __init__(self, value):

@@ -1,5 +1,9 @@
-from standardLibrary.variables import Variable
-import standardLibrary.numbery as numbery
+try:
+	from StandardLibrary.variables import Variable
+	import StandardLibrary.numbery as numbery
+except:
+	from variables import Variable
+	import numbery as number	
 
 class INT(Variable):
 	def __init__(self, value):

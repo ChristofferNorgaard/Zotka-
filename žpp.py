@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
-import standardLibrary.numbery as numbery
-import standardLibrary.grammar as grammar
-import standardLibrary.variables as variables
-from standardLibrary.Matematika import mfs
-from standardLibrary.primerjave import primerjave
+import StandardLibrary.numbery as numbery
+import StandardLibrary.grammar as grammar
+import StandardLibrary.variables as variables
+from StandardLibrary.Matematika import mfs
+from StandardLibrary.primerjave import primerjave
 form = variables.totype
 flags = sys.argv[1:]
 

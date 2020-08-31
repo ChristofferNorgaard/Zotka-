@@ -1,4 +1,7 @@
-from standardLibrary.variables import Variable
+try:
+	from StandardLibrary.variables import Variable
+except:
+	from variables import Variable
 from random import shuffle
 
 class SEZ(Variable):

@@ -1,7 +1,14 @@
-from standardLibrary.variables import Variable
-from standardLibrary.uloVar import ULO
-from standardLibrary.strVar import STR
-import standardLibrary.numbery as numbery
+
+try:
+	from StandardLibrary.variables import Variable
+	from StandardLibrary.uloVar import ULO
+	from StandardLibrary.strVar import STR
+	import StandardLibrary.numbery as numbery
+except:
+	from variables import Variable
+	from uloVar import ULO
+	from strVar import STR
+	import numbery as numbery
 
 class FLO(Variable):
 	def __init__(self, value):
@@ -14,13 +21,23 @@ class FLO(Variable):
 			v = value
 			Variable.__init__(self, 'flo', numbery.to_num(v))
 			self.real_value = v
-			
-		elif type(value) == INT:
+		
+		elif type(value) == str:
+			if ('1' in value or '2' in value or '3' in value or '4' in value or '5' in value or '6' in value or '7' in value or '8' in value or '9' in value): #je napisano z besedo
+				Variable.__init__(self, 'flo', numbery.to_num(value))
+				self.real_value = numbery.from_num(self.value)
+				
+			else:
+				v = value
+				Variable.__init__(self, 'flo', v)
+				self.real_value = numbery.from_num(v)
+
+		elif value.tip == 'int':
 			v = float(value.real_value)
 			Variable.__init__(self, 'flo', value.value)
 			self.real_value = v
 		
-		elif type(value) == NAR:
+		elif value.tip == 'nar':
 			v = float(value.real_value)
 			Variable.__init__(self, 'flo', value.value)
 			self.real_value = v
@@ -39,15 +56,7 @@ class FLO(Variable):
 			Variable.__init__(self, 'flo', tmp.value)
 			self.real_value = tmp.real_value
 
-		elif type(value) == str:
-			if ('1' in value or '2' in value or '3' in value or '4' in value or '5' in value or '6' in value or '7' in value or '8' in value or '9' in value): #je napisano z besedo
-				Variable.__init__(self, 'flo', numbery.to_num(value))
-				self.real_value = numbery.from_num(self.value)
-				
-			else:
-				v = value
-				Variable.__init__(self, 'flo', v)
-				self.real_value = numbery.from_num(v)
+		
 
 
 

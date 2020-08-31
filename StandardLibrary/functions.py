@@ -1,8 +1,14 @@
-from standardLibrary.numbery import from_num, to_num
-from standardLibrary.sezVar import SEZ
-from standardLibrary.sloVar import SLO
-from math import gamma
-from math import pi
+try:
+	from StandardLibrary.numbery import from_num, to_num
+	from StandardLibrary.sezVar import SEZ
+	from StandardLibrary.sloVar import SLO
+except:
+	from numbery import from_num, to_num
+	from sezVar import SEZ
+	from sloVar import SLO
+
+from math import gamma, pi
+
 '''
 pojej - vzame vrednost iz sklad
 potisni - doda vrednost na sklad
@@ -63,6 +69,7 @@ def plus(sklad):
 		sklad.append(a+b)
 	else:
 		sklad.append(float(a)+float(b))
+	#print(sklad)
 
 def minus(sklad):
 	b = sklad.pop()

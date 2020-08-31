@@ -1,6 +1,6 @@
 try:
-	from standardLibrary.variables import Variable
-	import standardLibrary.numbery as numbery
+	from StandardLibrary.variables import Variable
+	import StandardLibrary.numbery as numbery
 
 except Exception as e:
 	#print(e)

@@ -233,7 +233,7 @@ def from_num(x):
 	return r*predznak # vrne vrednost s pravim predznakom
 
 def test():
-	for x in range(20):
+	for _ in range(20):
 		a=input('napiši število z besedo ali ne: ')
 		try:
 			a=int(a)
