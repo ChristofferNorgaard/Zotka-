@@ -66,7 +66,7 @@ Seznami:
 	absolutna vrednost vrne dolžino seznama
 	pri deljenju z 0 se ga uredi, z ostalimi števili premeša
 	pri potenciranju se element iz seznama izbriše
-Slovarji:
+Slovarji: (slo)
 	pri prištevanju seznama ključa in vrednosti, se v slovar doda vrednost pod ključem ključe
 	pri množenju se vrednosti iz enega dodajo v drug slovar
 	pri odštevanju dobimo elemnt slovarja pod odštetim ključem
