@@ -16,7 +16,7 @@ prosim definiraj: nizenako je[Število je enako 10!}
 prosim potisni: enako je
 prosim naredi: izpiši|T
 prosim komentiraj: To je prostor za preskok
-komentiraj: To je prostor za preskok
+komentiraj: To je prostor za preskok - za vsak slučaj
 komentiraj: To je prostor za preskok
 komentiraj: To je prostor za preskok
 potisni: število
@@ -24,4 +24,4 @@ potisni: deset
 izračunaj: --
 naredi: izpiši|T
 komentiraj: Ne izbriši te vrstice
-komentiraj: Ne izbriši te vrstice
+komentiraj: Opis: Program vpraša za eno število, če je število enako 10 izpiše, da je število enako 10. Na koncu ipiše to število povečano za 10.

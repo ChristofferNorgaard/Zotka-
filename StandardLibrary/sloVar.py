@@ -18,7 +18,7 @@ class SLO(Variable):
 		self.value.update(other.value)
 		return self
 
-	def __sub__(self, other): # pri odštevanju dobimo element slovara, lahko ga tudi spreminjamo, ker deluje kot pointer, če je njegov tip posebej definiran. Ne deluje, če gre za primitivne tipe.
+	def __sub__(self, other): # pri odštevanju dobimo element slovarja
 		return self.value[other.value] 
 
 	def __abs__(self): # absolutna vrednost vrne dolžino slovarja

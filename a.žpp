@@ -18,4 +18,4 @@ prosim potisni: slovar
 prosim potisni: 
 izračunaj: ---
 naredi: izpiši|T
-komentiraj: ne briši
+komentiraj: Opis: Ustvari slovar, ki mu s pomočjo seznamčka nastavi vrednost '4' pod ključ '5'. Potem izpiše vrednost pod ključem '5' - torej '4'.
