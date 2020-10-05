@@ -11,7 +11,7 @@ class SLO(Variable):
 		Variable.__init__(self, 'sez', dict())
 
 	def __add__(self, keyval): # v primeru seštevanja, se doda v slovar
-		self.value[keyval.value[0]] = keyval.value[1]
+		self.value[keyval.value[0].value] = keyval.value[1].value
 		return self
 
 	def __mul__(self, other): # v primeru množenja, slovar razširi za drug slovar
@@ -19,7 +19,7 @@ class SLO(Variable):
 		return self
 
 	def __sub__(self, other): # pri odštevanju dobimo element slovara, lahko ga tudi spreminjamo, ker deluje kot pointer, če je njegov tip posebej definiran. Ne deluje, če gre za primitivne tipe.
-		return self.value[other] 
+		return self.value[other.value] 
 
 	def __abs__(self): # absolutna vrednost vrne dolžino slovarja
 		return len(self.value)
@@ -34,7 +34,7 @@ class SLO(Variable):
 		return str(self.value)
 
 	def __truediv__(self, other):
-		del self.value[other]
+		del self.value[other.valu]
 		return self
 
 	def __pow__(self, other):

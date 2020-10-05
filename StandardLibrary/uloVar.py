@@ -56,13 +56,13 @@ class ULO(Variable):
 			self.real_down = tmp.real_down
 			self.value = (numbery.to_num(self.real_up), numbery.to_num(self.real_down))
 
-		elif value.tip == 'int':
+		elif value.tip == 'celo število':
 			tmp = ULO(int(value))
 			self.real_up = tmp.real_up
 			self.real_down = tmp.real_down
 			self.value = (numbery.to_num(self.real_up), numbery.to_num(self.real_down))
 
-		elif value.tip == 'nar':
+		elif value.tip == 'naravno število':
 			tmp = ULO(int(value))
 			self.real_up = tmp.real_up
 			self.real_down = tmp.real_down

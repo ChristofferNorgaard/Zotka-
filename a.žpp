@@ -1,0 +1,21 @@
+prosim definiraj: sloslovar[}
+prosim definiraj: sezseznamček[}
+prosim definiraj: niz5[5}
+prosim potisni: slovar
+prosim potisni: seznamček
+prosim potisni: 5
+prosim izračunaj: --
+prosim definiraj: niz4[4}
+prosim potisni: 4
+izračunaj: --
+izračunaj: --
+naredi: izpiši|T
+prosim komentiraj: ne briši
+prosim potisni: slovar
+naredi: izpiši|T
+prosim definiraj: niz[5}
+prosim potisni: slovar
+prosim potisni: 
+izračunaj: ---
+naredi: izpiši|T
+komentiraj: ne briši

@@ -1,7 +1,7 @@
 prosim definiraj: nizvprašanje za uporabnika[Napiši eno število, ki naj mu prištejem 10: }
-prosim definiraj: intštevilo[sedem}
+prosim definiraj: celo številoštevilo[sedem}
 prosim komentiraj: sem se bo shranil odgovor
-prosim definiraj: intdeset[deset}
+prosim definiraj: celo številodeset[deset}
 prosim potisni: vprašanje za uporabnika
 prosim naredi: izpiši|T
 prosim naredi: preberi_število|T

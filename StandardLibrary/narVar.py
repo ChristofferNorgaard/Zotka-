@@ -11,35 +11,35 @@ class NAR(INT):
 	def __init__(self, value):
 		if type(value) == int:
 			v = value
-			Variable.__init__(self, 'nar', numbery.to_num(v))
+			Variable.__init__(self, 'naravno število', numbery.to_num(v))
 			self.real_value = v
 			if not v > 2:
 				raise Exception('nar je lahko le naravno število večje od 2.')
 
 		elif type(value) == float:
 			v = int(value)
-			Variable.__init__(self, 'nar', numbery.to_num(v))
+			Variable.__init__(self, 'naravno število', numbery.to_num(v))
 			self.real_value = v
 			if not v > 2:
 				raise Exception('nar je lahko le naravno število večje od 2.')
 
 		elif type(value) == str:
 			if ('1' in value or '2' in value or '3' in value or '4' in value or '5' in value or '6' in value or '7' in value or '8' in value or '9' in value): #je napisano z besedo
-				Variable.__init__(self, 'nar', numbery.to_num(value))
+				Variable.__init__(self, 'naravno število', numbery.to_num(value))
 				self.real_value = numbery.from_num(self.value)
 				if not self.real_value > 2:
 					raise Exception('nar je lahko le naravno število večje od 2.')
 				
 			else:
 				v = value
-				Variable.__init__(self, 'nar', v)
+				Variable.__init__(self, 'naravno število', v)
 				self.real_value = numbery.from_num(v)
 				if not self.real_value > 2:
 					raise Exception('nar je lahko le naravno število večje od 2.')
 
 		elif value.tip == 'flo':
 			v = int(value.real_value)
-			Variable.__init__(self, 'nar', numbery.to_num(v))
+			Variable.__init__(self, 'naravno število', numbery.to_num(v))
 			self.real_value = v
 			if not v > 2:
 				raise Exception('nar je lahko le naravno število večje od 2.')
@@ -47,28 +47,28 @@ class NAR(INT):
 		elif value.tip == 'int':
 			if value.real_value > 2:
 				v = value.real_value
-				Variable.__init__(self, 'nar', value.value)
+				Variable.__init__(self, 'naravno število', value.value)
 				self.real_value = v
 			else:
 				raise Exception('nar je lahko le naravno število večje od 2.')
 		
-		elif value.tip == 'nar':
+		elif value.tip == 'naravno število':
 			v = value.real_value
-			Variable.__init__(self, 'nar', value.value)
+			Variable.__init__(self, 'naravno število', value.value)
 			self.real_value = v
 			if not v > 2:
 				raise Exception('nar je lahko le naravno število večje od 2.')
 
 		elif value.tip == 'ulo':
 			v = int(value)
-			Variable.__init__(self, 'nar', numbery.to_num(v))
+			Variable.__init__(self, 'naravno število', numbery.to_num(v))
 			self.real_value = v
 			if not v > 2:
 				raise Exception('nar je lahko le naravno število večje od 2.')
 
 		elif value.tip == 'str':
 			tmp = NAR(str(value))
-			Variable.__init__(self, 'nar', tmp.value)
+			Variable.__init__(self, 'naravno število', tmp.value)
 			self.real_value = tmp.real_value
 
 		

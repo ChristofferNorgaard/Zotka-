@@ -4,7 +4,7 @@ except ModuleNotFoundError:
     import numbery
     
 class Variable:
-	types = {'int', 'nar', 'dec', 'ulo', 'flo', 'kom', 'bul', 'črk', 'bes', 'niz', 'sez', 'mno', 'slo', 'str'}
+	types = {'celo število', 'naravno število', 'ulo', 'flo', 'bul', 'niz', 'sez', 'slo', 'str'}
 	def __init__(self, tip, value):
 		if tip in Variable.types:
 			self.tipe = tip

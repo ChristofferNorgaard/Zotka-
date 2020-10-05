@@ -9,42 +9,42 @@ class INT(Variable):
 	def __init__(self, value):
 		if type(value) == int:
 			v = value
-			Variable.__init__(self, 'int', numbery.to_num(v))
+			Variable.__init__(self, 'celo število', numbery.to_num(v))
 			self.real_value = v
 
 		elif type(value) == float:
 			v = int(value)
-			Variable.__init__(self, 'int', numbery.to_num(v))
+			Variable.__init__(self, 'celo število', numbery.to_num(v))
 			self.real_value = v
 
 		elif type(value) == str:
 			if ('1' in value or '2' in value or '3' in value or '4' in value or '5' in value or '6' in value or '7' in value or '8' in value or '9' in value): #je napisano z besedo
-				Variable.__init__(self, 'int', numbery.to_num(value))
+				Variable.__init__(self, 'celo število', numbery.to_num(value))
 				self.real_value = numbery.from_num(self.value)
 				
 			else:
 				v = value
-				Variable.__init__(self, 'int', v)
+				Variable.__init__(self, 'celo število', v)
 				self.real_value = numbery.from_num(v)
 			
-		elif value.tip == 'int':
+		elif value.tip == 'celo število':
 			v = value.real_value
-			Variable.__init__(self, 'int', value.value)
+			Variable.__init__(self, 'celo število', value.value)
 			self.real_value = v
 
 		elif value.tip == 'flo':
 			v = int(value.real_value)
-			Variable.__init__(self, 'int', value.value)
+			Variable.__init__(self, 'celo število', value.value)
 			self.real_value = v
 
 		elif value.tip == 'ulo':
 			v = int(value)
-			Variable.__init__(self, 'int', numbery.to_num(v))
+			Variable.__init__(self, 'celo število', numbery.to_num(v))
 			self.real_value = v
 
 		elif value.tip == 'str':
 			tmp = INT(str(value))
-			Variable.__init__(self, 'int', tmp.value)
+			Variable.__init__(self, 'celo število', tmp.value)
 			self.real_value = tmp.real_value
 
 		else:
@@ -52,7 +52,7 @@ class INT(Variable):
 				v = value.real_value
 			except:
 				v = int(value)
-			Variable.__init__(self, 'int', value.value)
+			Variable.__init__(self, 'celo število', value.value)
 			self.real_value = v
 
 
