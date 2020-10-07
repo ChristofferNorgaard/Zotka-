@@ -11,7 +11,7 @@ class SLO(Variable):
 		Variable.__init__(self, 'sez', dict())
 
 	def __add__(self, keyval): # v primeru seštevanja, se doda v slovar
-		self.value[keyval.value[0].value] = keyval.value[1].value
+		self.value[keyval.value[0].value] = keyval.value[1]
 		return self
 
 	def __mul__(self, other): # v primeru množenja, slovar razširi za drug slovar
@@ -34,7 +34,7 @@ class SLO(Variable):
 		return str(self.value)
 
 	def __truediv__(self, other):
-		del self.value[other.valu]
+		del self.value[other.value]
 		return self
 
 	def __pow__(self, other):
